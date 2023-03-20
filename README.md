@@ -1,4 +1,5 @@
 # L2xs-Music
+<<<<<<< HEAD
 
 > L2xs-Music 是五伏高压博主设计的一款在线音乐播放器，具有音乐搜索、播放、歌词显示、播放历史、查看歌曲评论、网易云用户歌单播放同步等功能
 
@@ -118,3 +119,6 @@ node app.js
 ## License
 
 [MIT](https://github.com/chaojiaxi/L2xs-Music/blob/master/LICENSE)
+=======
+五伏高压在线音乐平台
+>>>>>>> ced4dd21a2db723bf5e080e64ac5d73564c65c2d
