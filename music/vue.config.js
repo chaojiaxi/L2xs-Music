@@ -2,7 +2,7 @@
  * @Author: llxs
  * @Date: 2023-03-20 20:12:34
  * @LastEditors: llxs
- * @LastEditTime: 2023-03-20 20:44:33
+ * @LastEditTime: 2023-03-21 19:53:49
  * @Description: 
  * @custom_string_llxs_copyright: Copyright by llxs, All Rights Reserved. 
  */
@@ -17,7 +17,7 @@ function resolve(dir) {
 // const isEnvProduction = process.env.NODE_ENV === 'production'
 
 // 注入版本信息
-// process.env.VUE_APP_VERSION = require('./package.json').version
+process.env.VUE_APP_VERSION = require('./package.json').version
 // 注入版本更新时间
 // process.env.VUE_APP_UPDATE_TIME = dayjs().locale('zh-cn').format('YYYY-MM-DD')
 

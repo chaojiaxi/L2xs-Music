@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-// import './plugins/axios';
+import './utils/axios';
 import 'normalize.css/normalize.css';
 import '@/assets/styles/index.scss';
 
