@@ -10,17 +10,62 @@ import axios from '@/utils/axios';
 import { DEFAULT_LIMIT } from '@/config';
 import { formatSongs } from '@/utils/song';
 
-// 排行榜列表
+/** 
+ * @description: 排行榜列表
+ * @return {*}
+ */
 export function getToplistDetail() {
     return axios.get('/toplist/detail');
 }
 
-// 推荐歌单
+/** 
+ * @description: 推荐歌单
+ * @return {*}
+ */
 export function getPersonalized() {
     return axios.get('/personalized');
 }
 
-// 歌单详情
+/** 
+ * @description: 推荐电台
+ * @return {*}
+ */
+export function getDjProgram(page = 0, limit = 30) {
+    return axios.get('/dj/hot', {
+        params: {
+            offset: page * limit,
+            limit: limit,
+        }
+    });
+}
+
+
+/** 
+ * @description: 获取电台详情
+ * @param {*} ids
+ * @return {*}
+ */
+export function getDjDetail(rid) {
+    return axios.get('/dj/detail', {
+        params: {
+            rid
+        }
+    })
+}
+
+/** 
+ * @description: 推荐mv
+ * @return {*}
+ */
+export function getMvPersonalized() {
+    return axios.get('/personalized/mv');
+}
+
+/** 
+ * @description: 歌单详情
+ * @param {*} id
+ * @return {*}
+ */
 export function getPlaylistDetail(id) {
     return new Promise((resolve, reject) => {
         axios.get('/playlist/detail', {
@@ -47,7 +92,13 @@ export function getPlaylistDetail(id) {
     })
 }
 
-// 搜索
+/** 
+ * @description: 搜索
+ * @param {*} keywords
+ * @param {*} page
+ * @param {*} limit
+ * @return {*}
+ */
 export function search(keywords, page = 0, limit = DEFAULT_LIMIT) {
     return axios.get('/search', {
         params: {
@@ -58,12 +109,19 @@ export function search(keywords, page = 0, limit = DEFAULT_LIMIT) {
     })
 }
 
-// 热搜
+/** 
+ * @description: 热搜
+ * @return {*}
+ */
 export function searchHot() {
     return axios.get('/search/hot')
 }
 
-// 获取用户歌单详情
+/** 
+ * @description: 获取用户歌单
+ * @param {*} uid
+ * @return {*}
+ */
 export function getUserPlaylist(uid) {
     return axios.get('/user/playlist', {
         params: {
@@ -72,7 +130,11 @@ export function getUserPlaylist(uid) {
     })
 }
 
-// 获取歌曲详情
+/** 
+ * @description: 获取歌曲详情
+ * @param {*} ids
+ * @return {*}
+ */
 export function getMusicDetail(ids) {
     return axios.get('/song/detail', {
         params: {
@@ -81,7 +143,11 @@ export function getMusicDetail(ids) {
     })
 }
 
-// 获取音乐是否可以用
+/** 
+ * @description: 获取音乐是否可以用
+ * @param {*} id
+ * @return {*}
+ */
 export function getCheckMusic(id) {
     return axios.get('/check/music', {
         params: {
@@ -90,7 +156,11 @@ export function getCheckMusic(id) {
     })
 }
 
-// 获取音乐地址
+/** 
+ * @description: 获取音乐地址
+ * @param {*} id
+ * @return {*}
+ */
 export function getMusicUrl(id) {
     return axios.get('/song/url', {
         params: {
@@ -99,7 +169,11 @@ export function getMusicUrl(id) {
     })
 }
 
-// 获取歌词
+/** 
+ * @description: 获取歌词
+ * @param {*} id
+ * @return {*}
+ */
 export function getLyric(id) {
     const url = '/lyric'
     return axios.get(url, {
@@ -109,7 +183,13 @@ export function getLyric(id) {
     })
 }
 
-// 获取音乐评论
+/** 
+ * @description: 获取音乐评论
+ * @param {*} id
+ * @param {*} page
+ * @param {*} limit
+ * @return {*}
+ */
 export function getComment(id, page, limit = DEFAULT_LIMIT) {
     return axios.get('/comment/music', {
         params: {

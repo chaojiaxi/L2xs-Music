@@ -8,8 +8,11 @@
  */
 import { MMPLAYER_CONFIG } from '@/config';
 
+// 浏览器本地存储 API 
 const STORAGE = window.localStorage;
+
 const storage = {
+    // 从本地存储中获取指定key对应的数据
     get(key, data = []) {
         if (STORAGE) {
         return  STORAGE.getItem(key)
@@ -19,11 +22,13 @@ const storage = {
                 : data;
         }
     },
+    // 将指定key对应的值设置为val
     set(key, val) {
         if (STORAGE) {
             STORAGE.setItem(key, val);
         }
     },
+    // 删除指定key对应的数据
     clear(key) {
         if (STORAGE) {
             STORAGE.removeItem(key);
@@ -63,13 +68,13 @@ export function setHistoryList(music) {
     return list;
 }
 
-// 删除一条播放历史
+// 删除播放历史列表中指定的音乐
 export function removeHistoryList(music) {
     storage.set(HISTORYLIST_KEY, JSON.stringify(music));
     return music;
 }
 
-// 清空播放历史
+// 清空播放历史列表
 export function clearHistoryList() {
     storage.clear(HISTORYLIST_KEY);
     return [];
@@ -77,15 +82,15 @@ export function clearHistoryList() {
 
 /**
  * 播放模式
- * @type    MODE_KEY：key值
- *          HistoryListMAX：最大长度
+ * @type MODE_KEY：key值
+ * HistoryListMAX：最大长度
  */
 const MODE_KEY = '__mmPlayer_mode__';
-// 获取播放模式
+// 获取当前播放模式
 export function getMode() {
     return Number(storage.get(MODE_KEY, MMPLAYER_CONFIG.PLAY_MODE));
 }
-// 修改播放模式
+// 修改当前的播放模式
 export function setMode(mode) {
     storage.set(MODE_KEY, mode);
     return mode;
@@ -100,7 +105,7 @@ const USERID_KEY = '__mmPlayer_userID__';
 export function getUserId() {
     return Number(storage.get(USERID_KEY, null));
 }
-// 修改用户uid
+// 修改当前用户的uid
 export function setUserId(uid) {
     storage.set(USERID_KEY, uid);
     return uid;
@@ -111,12 +116,13 @@ export function setUserId(uid) {
  * @type VERSION_KEY：key值
  */
 const VERSION_KEY = '__mmPlayer_version__';
-// 获取版本号
+// 获取当前的版本号
 export function getVersion() {
     let version = storage.get(VERSION_KEY, null);
+    // console.log(version,'11111111')
     return Array.isArray(version) ? null : version;
 }
-// 修改版本号
+// 修改当前的版本号
 export function setVersion(version) {
     storage.set(VERSION_KEY, version);
     return version;
@@ -127,12 +133,12 @@ export function setVersion(version) {
  * @type VOLUME_KEY：key值
  */
 const VOLUME_KEY = '__mmPlayer_volume__';
-// 获取音量
+// 获取当前音量大小
 export function getVolume() {
     const volume = storage.get(VOLUME_KEY, MMPLAYER_CONFIG.VOLUME);
     return Number(volume);
 }
-// 修改音量
+// 修改当前的音量大小
 export function setVolume(volume) {
     storage.set(VOLUME_KEY, volume);
     return volume;

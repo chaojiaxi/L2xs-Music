@@ -1,12 +1,18 @@
 /*
-* @Author: llxs
-* @Date: 2023-03-21 19:50:55
+ * @Author: llxs
+ * @Date: 2023-03-21 19:50:55
  * @LastEditors: llxs
  * @LastEditTime: 2023-03-22 09:40:58
-* @Description: 
-* @custom_string_llxs_copyright: Copyright by llxs, All Rights Reserved. 
-*/
-// 随机排序数组/洗牌函数 https://github.com/lodash/lodash/blob/master/shuffle.js
+ * @Description: 
+ * @custom_string_llxs_copyright: Copyright by llxs, All Rights Reserved. 
+ */
+
+/** 
+ * @description: 随机排序数组/洗牌函数 https://github.com/lodash/lodash/blob/master/shuffle.js
+ * @param {*} source
+ * @param {*} array
+ * @return {*}
+ */
 function copyArray(source, array) {
     let index = -1;
     const length = source.length;
@@ -17,6 +23,11 @@ function copyArray(source, array) {
     return array;
 }
 
+/** 
+ * @description: 数组中的元素随机排序
+ * @param {*} array
+ * @return {*}
+ */
 export const randomSortArray = function shuffle(array) {
     const length = array == null ? 0 : array.length;
     if (!length) {
@@ -34,7 +45,12 @@ export const randomSortArray = function shuffle(array) {
     return result;
 }
 
-// 防抖函数
+/** 
+ * @description: 防抖函数
+ * @param {*} func
+ * @param {*} delay
+ * @return {*}
+ */
 export function debounce(func, delay) {
     let timer;
     return function (...args) {
@@ -47,12 +63,20 @@ export function debounce(func, delay) {
     }
 }
 
-// 补0函数
+/** 
+ * @description: 如果 s 是一个一位数，则在其前面添加一个 0，并返回结果字符串
+ * @param {*} s
+ * @return {*}
+ */
 export function addZero(s) {
     return s < 10 ? '0' + s : s;
 }
 
-// 歌词解析
+/** 
+ * @description: 歌词解析，解析成时间和歌词文本的数组
+ * @param {*} d
+ * @return {*}
+ */
 const timeExp = /\[(\d{2,}):(\d{2})(?:\.(\d{2,3}))?]/g;
 export function parseLyric(lrc) {
     const lines = lrc.split('\n');
@@ -74,7 +98,11 @@ export function parseLyric(lrc) {
     return lyric;
 }
 
-// 时间格式化
+/** 
+ * @description: 一个以秒为单位的时间值转换为 mm:ss 格式的字符串
+ * @param {*} value
+ * @return {*}
+ */
 export function format(value) {
     let minute = Math.floor(value / 60);
     let second = Math.floor(value % 60);
@@ -84,29 +112,39 @@ export function format(value) {
 /**
  * https://github.com/videojs/video.js/blob/master/src/js/utils/promise.js
  * Silence a Promise-like object.
- *
  * This is useful for avoiding non-harmful, but potentially confusing "uncaught
  * play promise" rejection error messages.
- *
- * @param  {Object} value
- *         An object that may or may not be `Promise`-like.
+ * @param  {Object} value An object that may or may not be `Promise`-like.
  */
 export function isPromise(v) {
     return v !== undefined && v !== null && typeof v.then === 'function';
 }
 
+/** 
+ * @description: 静默 Promise 对象，用于消除 Promise 拒绝时的警告信息
+ * @param {*} value
+ * @return {*}
+ */
 export function silencePromise(value) {
     if (isPromise(value)) {
         value.then(null, () => {});
     }
 }
 
-// 判断 string 类型
+/** 
+ * @description: 判断变量是否为字符串类型
+ * @param {*} v
+ * @return {*}
+ */
 export function isString(v) {
     return typeof v === 'string';
 }
 
-// http 链接转化成 https
+/** 
+ * @description: http协议转化成https协议
+ * @param {*} url
+ * @return {*}
+ */
 export function toHttps(url) {
     if (!isString(url)) {
         return url;

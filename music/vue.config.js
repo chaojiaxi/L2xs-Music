@@ -2,13 +2,13 @@
  * @Author: llxs
  * @Date: 2023-03-20 20:12:34
  * @LastEditors: llxs
- * @LastEditTime: 2023-03-21 19:53:49
+ * @LastEditTime: 2023-04-20 15:33:12
  * @Description: 
  * @custom_string_llxs_copyright: Copyright by llxs, All Rights Reserved. 
  */
 // const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
-// const dayjs = require('dayjs')
+const dayjs = require('dayjs')
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -19,7 +19,7 @@ function resolve(dir) {
 // 注入版本信息
 process.env.VUE_APP_VERSION = require('./package.json').version
 // 注入版本更新时间
-// process.env.VUE_APP_UPDATE_TIME = dayjs().locale('zh-cn').format('YYYY-MM-DD')
+process.env.VUE_APP_UPDATE_TIME = dayjs().locale('zh-cn').format('YYYY-MM-DD')
 
 module.exports = {
     publicPath: '',
@@ -51,6 +51,13 @@ module.exports = {
     //     return args
     //     })
     // },
+    chainWebpack(config) {
+        // 标题
+		config.plugin('html').tap((args) => {
+			args[0].title = '前端摸鱼塘';
+			return args;
+		})
+	},
     configureWebpack: {
         // name: name,
         // 设置别名alias
@@ -67,7 +74,10 @@ module.exports = {
     pluginOptions: {
         'style-resources-loader': {
             preProcessor: 'scss',
-            patterns: [resolve('src/assets/styles/variables.scss')]
+            patterns: [
+                resolve('src/assets/styles/variables.scss'),
+                resolve('src/assets/styles/mixin.scss'),
+            ]
         }
     }
 }

@@ -8,6 +8,7 @@
  */
 import { toHttps } from './util';
 
+// 歌手信息转换成字符串，用斜杠分隔
 function filterSinger(singers) {
     if (!Array.isArray(singers) || !singers.length) {
         return '';
@@ -19,6 +20,7 @@ function filterSinger(singers) {
     return arr.join('/');
 }
 
+// 定义了一个歌曲的数据结构
 export class Song {
     constructor({ id, name, singer, album, image, duration, url }) {
         this.id = id;
@@ -31,6 +33,7 @@ export class Song {
     }
 }
 
+// 接收一个音乐数据对象，根据其属性创建一个 Song 实例并返回
 export function createSong(music) {
     const album = music.album || music.al || {};
     const duration = music.duration || music.dt;
@@ -45,7 +48,7 @@ export function createSong(music) {
     });
 }
 
-// 歌曲数据格式化
+// 接收一个音乐列表数据，遍历列表中的每一个元素，调用 createSong 函数创建 Song 实例，并将其存入一个数组中返回
 export function formatSongs(list) {
     const Songs = [];
     list.forEach((item) => {

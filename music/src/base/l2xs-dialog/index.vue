@@ -2,32 +2,36 @@
  * @Author: llxs
  * @Date: 2023-03-21 20:25:15
  * @LastEditors: llxs
- * @LastEditTime: 2023-03-21 20:33:32
+ * @LastEditTime: 2023-04-28 14:39:42
  * @Description: 
  * @custom_string_llxs_copyright: Copyright by llxs, All Rights Reserved. 
 -->
 <template>
     <!--对话框-->
     <transition name="mm-dialog-fade">
-        <div v-show="dialogShow" class="mm-dialog-box">
-            <div class="mm-dialog-wrapper">
-            <div class="mm-dialog-content">
-                <div class="mm-dialog-head" v-text="headText"></div>
-                <slot>
-                    <!-- eslint-disable-next-line vue/no-v-html -->
-                    <div class="mm-dialog-text" v-html="bodyText"></div>
-                </slot>
-                <div class="mm-dialog-btns">
-                    <div
-                        v-if="dialogType !== 'alert'"
-                        class="mm-btn-cancel"
-                        @click="cancel"
-                        v-text="cancelBtnText">
+        <div v-show="dialogShow" class="L2xs-dialog-box">
+            <div class="L2xs-dialog-wrapper">
+                <div class="L2xs-dialog-content">
+                    <!-- 对话框-头部提示 -->
+                    <div class="L2xs-dialog-head" v-text="headText"></div>
+                    <slot>
+                        <!-- eslint-disable-next-line vue/no-v-html -->
+                        <!-- 对话框-中间文字 -->
+                        <div class="mm-dialog-text" v-html="bodyText"></div>
+                    </slot>
+                    <div class="L2xs-dialog-btns">
+                        <!-- 对话框-取消按钮 -->
+                        <div class="mm-btn-cancel"
+                            v-if="dialogType !== 'alert'"
+                            @click="cancel()"
+                            v-text="cancelBtnText">
+                        </div>
+                        <!-- 对话框-其他按钮 -->
+                        <slot name="btn"></slot>
+                        <!-- 对话框-确定按钮 -->
+                        <div class="mm-btn-confirm" @click="confirm" v-text="confirmBtnText"></div>
                     </div>
-                    <slot name="btn"></slot>
-                    <div class="mm-btn-confirm" @click="confirm" v-text="confirmBtnText"></div>
                 </div>
-            </div>
             </div>
         </div>
     </transition>
@@ -74,11 +78,22 @@ export default {
         }
     },
     computed: {
+
+        /**
+         * @description: 对话框类型
+         * @return {*}
+         */        
         dialogType() {
             return this.type.toLowerCase()
         }
     },
     watch: {
+
+        /**
+         * @description: 对话框显示
+         * @param {*} val
+         * @return {*}
+         */        
         dialogShow(val) {
             if (val && this.appendToBody) {
                 document.body.appendChild(this.$el)
@@ -96,20 +111,36 @@ export default {
         }
     },
     methods: {
-        // 显示事件
+        
+        /**
+         * @description: 显示事件
+         * @return {*}
+         */        
         show() {
             this.dialogShow = true
         },
-        // 隐藏事件
+        
+        /**
+         * @description: 隐藏事件
+         * @return {*}
+         */        
         hide() {
             this.dialogShow = false
         },
-        // 取消事件
+        
+        /**
+         * @description: 取消事件
+         * @return {*}
+         */        
         cancel() {
             this.hide()
             this.$emit('cancel')
         },
-        // 确定事件
+        
+        /**
+         * @description: 确定事件
+         * @return {*}
+         */        
         confirm() {
             this.hide()
             this.$emit('confirm')
@@ -119,9 +150,9 @@ export default {
 </script>
 
 <style lang="scss">
- 
-  
-.mm-dialog-box {
+$dialog-prefix-cls: mm-dialog;
+
+.L2xs-dialog-box {
     position: fixed;
     left: 0;
     right: 0;
@@ -131,19 +162,19 @@ export default {
     background-color: $dialog_bg_color;
     user-select: none;
     backdrop-filter: $backdrop_filter;
-        &.mm-dialog-fade-enter-active {
+        &.#{$dialog-prefix-cls}-fade-enter-active {
             animation: mm-dialog-fadein 0.3s;
             .mm-dialog-content {
                 animation: mm-dialog-zoom 0.3s;
             }
         }
-        .mm-dialog-wrapper {
+        .L2xs-dialog-wrapper  {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1996;
-            .mm-dialog-content {
+            .L2xs-dialog-content {
                 width: 420px;
                 border-radius: $dialog_border_radius;
                 background: $dialog_content_bg_color;
@@ -152,19 +183,19 @@ export default {
                     border-radius: $dialog_mobile_border_radius;
                     text-align: center;
                 }
-                .mm-dialog-head {
+                .L2xs-dialog-head {
                     padding: 15px;
                     padding-bottom: 0;
                     font-size: $font_size_large;
                     color: $text_color_active;
                 }
-                .mm-dialog-text {
+                .#{$dialog-prefix-cls}-text {
                     padding: 20px 15px;
                     line-height: 22px;
                     font-size: $font_size_medium;
                     color: $dialog_text_color;
                 }
-                .mm-dialog-btns {
+                .L2xs-dialog-btns {
                     display: flex;
                     align-items: center;
                     padding: 0 15px 10px;
